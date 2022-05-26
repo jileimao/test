@@ -286,16 +286,8 @@ class V2XVoxelNet(SingleStage3DDetector):
         Returns:
             dict: Losses of each branch.
         """
-        for ii in range(len(infrastructure_points)):
-            infrastructure_points[ii][:, 3] = 255 * infrastructure_points[ii][:, 3]
-        feat_veh = self.extract_feat(points, img_metas, points_view='vehicle')
-        feat_inf = self.extract_feat(infrastructure_points, img_metas, points_view='infrastructure')
-        feat_fused = self.feature_fusion(feat_veh, feat_inf, img_metas, mode='fusion')
-        outs = self.bbox_head(feat_fused)
-        loss_inputs = outs + (gt_bboxes_3d, gt_labels_3d, img_metas)
-        losses = self.bbox_head.loss(
-            *loss_inputs, gt_bboxes_ignore=gt_bboxes_ignore)
-        return losses
+        pass
+        return 0
 
     def simple_test(self, points, img_metas, imgs=None, infrastructure_points=None, rescale=False):
         """Test function without augmentaiton."""
